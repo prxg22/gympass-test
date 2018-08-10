@@ -1,0 +1,94 @@
+/**
+ * Typography settings
+ * Base font size: 16px (1rem)
+ * Line height: 24px (1.5rem)
+*/
+@import 'functions/color'
+@import 'tokens/fonts'
+
+$font-size-base = 16px // 1rem
+$line-height-base = 24px
+
+:global
+  html
+    font-variant-ligatures: none
+    -webkit-font-variant-ligatures: none
+    text-rendering: optimizeLegibility
+    -moz-osx-font-smoothing: grayscale
+    font-smoothing: antialiased
+    -webkit-font-smoothing: antialiased
+
+  body
+    font-size: $font-size-base
+    font-family: $font-family-text
+    font-weight: $font-weight.regular
+    line-height: $line-height-base
+
+  /**
+  * Heading values
+  */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: $font-family-heading
+    font-weight: $font-weight.bold
+    letter-spacing: $letter-spacing-negative
+    word-wrap: break-word
+
+  h1
+    font-size: $font-size.heading.xl
+    line-height: $line-height.heading.xl
+
+  h2
+    font-size: $font-size.heading.lg
+    line-height: $line-height.heading.md
+
+  h3
+    font-size: $font-size.heading.md
+    line-height: $line-height.heading.md
+
+  h4
+    font-size: $font-size.heading.sm
+    line-height: $line-height.heading.sm
+
+  h5
+    font-size: $font-size.heading.xs
+    line-height: $line-height.heading.xs
+
+  h6
+    font-size: $font-size.heading.xs2
+    line-height: $line-height.heading.xs2
+
+  .display // just for the h1 tag
+    font-size: $font-size.heading.xl2
+    line-height: $line-height.heading.xl2
+
+    &--regular
+      font-weight: $font-weight.regular
+
+  /**
+  * Content text values
+  */
+  p,
+  span
+    font-size: $font-size.text.md
+    line-height: $line-height.text.md
+
+    &.caption
+      font-size: $font-size.text.sm
+      line-height: $line-height.text.sm
+
+    &.tinny
+      font-size: $font-size.text.xs
+      line-height: $line-height.text.xs
+
+  /**
+  * Anchors and links
+  */
+  a
+    position: relative
+    color: $brand-01
+    text-decoration: none

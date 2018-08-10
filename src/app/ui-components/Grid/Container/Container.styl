@@ -1,0 +1,25 @@
+@import "../../../../styles/base"
+
+$container-default
+  transform: translateZ(0) // 3D depth hack
+  center(1140px)
+
+$container
+  @extends $container-default
+
+  &--fluid
+    width: 100%
+
+  +media-content(xs)
+    center(container.xs)
+  +media-content(sm)
+    center(container.sm)
+  +media-content(md)
+    center(container.md)
+  +media-content(lg)
+    center(container.lg)
+  +media-content(xl)
+    center(container.xl)
+
+.container
+  @extends $container

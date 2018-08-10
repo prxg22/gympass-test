@@ -1,0 +1,20 @@
+/**
+ * Motion transition values
+ * Getter example:
+ * .card:hover {transition: all ease-in-out $duration.short-1}
+ */
+$duration = {
+  fast: {
+    x1: 0.16s,  // best for small elements + out value
+    x2: 0.24s   // best for small elements + in value
+  },
+  medium: {
+    x1: 0.32s,  // best for navigation elements + out value
+    x2: 0.48s   // best for navigation elements + in value
+  },
+  slow: {
+    x1: 0.56s,  // best for block + out value
+    x2: 0.64s,   // best for block + in value
+    x3: 1.28s,
+  }
+}

@@ -1,0 +1,90 @@
+/**
+ * Imports
+ */
+@import "../../../styles/base"
+
+/**
+ * Constants
+ */
+$iconSize = {
+  xxs: 0.75rem,     // 16px
+  xs: 1rem,     // 16px
+  sm: 1.5rem,   // 24px
+  md: 2rem,     // 32px
+  lg: 2.5rem,   // 40px
+  xl: 3rem,     //48px
+  xxl: 3.5rem,  //56px
+  big: 4rem     //64px
+}
+
+/**
+ * Use icons as needed
+ *
+ * Examples:
+ *   .{$fa-css-prefix}-glass
+ *     fa-icon("glass")
+ */
+// fa-icon($icon, $position="before")
+//   if $position is "before"
+//     &:before
+//       content: $icons[$icon]
+//   else
+//     &:after
+//       content: $icons[$icon]
+//
+// /**
+//  * Enable all icons
+//  */
+// import-all-icons()
+//   for icon in $icons
+//     .icn--{icon}
+//       fa-icon(icon)
+
+/**
+ * Default blocks
+ */
+$icon-default
+  &:before
+    // font-family: "printi-ui-icons" !important
+    font-size: 1rem !important
+    font-style: normal !important
+    font-variant: normal !important
+    text-transform: none !important
+    speak: none
+    line-height: 1
+
+  &--xs
+    &^[0]:before
+      font-size: $iconSize.xs !important
+
+  &--sm
+    &^[0]:before
+      font-size: $iconSize.sm !important
+
+  &--md
+    &^[0]:before
+      font-size: $iconSize.md !important
+
+  &--lg
+    &^[0]:before
+      font-size: $iconSize.lg !important
+
+  &--xl
+    &^[0]:before
+      font-size: $iconSize.xl !important
+
+  &--xxl
+    &^[0]:before
+      font-size: $iconSize.xxl !important
+
+  &--big
+    &^[0]:before
+      font-size: $iconSize.big !important
+
+/**
+ * Helper class
+ */
+.icn
+  @extend $icon-default
+
+// import-all-icons()

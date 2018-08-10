@@ -1,0 +1,110 @@
+/**
+ * Imports
+ */
+@import "../../../styles/base"
+
+/**
+ * Default blocks
+ */
+$button-default
+  display: inline-flex
+  justify-content: center
+  height: $line-height.text.xl2
+  padding: 0 $spacing.md
+
+  border-radius: $radius.medium
+  border-width: $border-width.small
+  border-style: solid
+
+  color: $text-03
+  font-size: $font-size.text.md
+  text-align: center
+  text-decoration: none !important
+
+  box-sizing: border-box
+  cursor: pointer
+  outline: none
+  transition: all ease-in-out $duration.fast.x2
+
+$button-outline
+  background-color: transparent
+
+$button
+  @extend $button-default
+
+  /**
+   * Modifiers
+   */
+  &--small
+    height: $line-height.text.xl
+    font-size: $font-size.text.sm
+
+    & ^[0]__icn
+        &--position-left
+          margin-right: $spacing.xs
+
+        &--position-right
+          margin-left: $spacing.xs
+
+  &--block
+    display: flex
+    min-width: 100%
+
+  &--primary
+    background-color: $brand-01
+    border-color: $brand-01
+
+
+  &--outline
+    &-primary
+      @extend $button-outline
+
+      border-color: $brand-01
+      color: $brand-01
+
+  &--pill
+    border-radius: $radius.pill
+
+  &--only-icon
+    height: auto
+    padding: 0
+    border: 0
+    background-color: transparent !important
+    color: inherit
+
+  &--no-text
+    & ^[0]__icn
+      margin: 0 !important
+
+  &:disabled,
+  &[disabled="disabled"]
+    opacity: $opacity.level-3
+    cursor: not-allowed
+    pointer-events: none
+
+  &__label,
+  &__icn
+    align-self: center
+    font-size: inherit
+
+  &__icn
+    display: inline-flex
+    align-self: center
+    color: inherit
+    transition: all ease-in-out $duration.fast.x2
+
+    &--position-left
+      order: -1
+      margin-right: $spacing.xs
+      transform: translateX(0)
+
+    &--position-right
+      order: 2
+      margin-left: $spacing.xs
+      transform: translateX(0)
+
+/**
+ * Helper class
+ */
+.btn
+  @extend $button

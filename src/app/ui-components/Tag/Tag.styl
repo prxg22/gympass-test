@@ -1,0 +1,66 @@
+/**
+ * Imports
+ */
+@import "../../../styles/base.styl"
+
+/**
+ * Constants
+ */
+$width = 136px
+$price-width = rem-calc($width)
+
+shape-price(color)
+  content: ''
+  position: absolute
+  right: -($spacing.xs)
+  display: inline-block
+  width: 0
+  height: 0
+  border-top: $spacing.xs solid transparent
+  border-bottom: $spacing.xs solid transparent
+  border-left: $spacing.xs solid color
+
+/**
+ * Default blocks
+ */
+$tag-default
+  display: inline-block
+  padding: 0 $spacing.md
+  background-color: $brand-01
+  border-radius: $radius.big
+
+  font-size: $font-size.text.xs
+  line-height: $line-height.text.sm
+  text-align: center
+  color: $text-03 !important
+
+  &--shape-price
+    position: relative
+    display: inline-block
+    border-radius: initial
+
+    // right tip
+    &:after
+      shape-price($brand-01)
+
+
+  &--secondary
+    color: $text-03 !important
+    background-color: $brand-02
+
+    &^[0]--shape-price
+      &:after
+        border-left: $spacing.xs solid $brand-02
+
+  &--large
+    min-width: $price-width
+    line-height: $line-height.text.lg
+    font-size: $font-size.text.sm
+
+    &^[0]--shape-price
+      &:after
+        border-top: $spacing.sm solid transparent
+        border-bottom: $spacing.sm solid transparent
+
+.tag
+  @extend $tag-default

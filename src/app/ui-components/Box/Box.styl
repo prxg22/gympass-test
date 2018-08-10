@@ -1,0 +1,42 @@
+@import "../../../styles/base.styl"
+
+create-box-shadow-classes()
+  lv = 0
+  for $level, $colors in $shadows
+    lv += 1
+    for $color, $shadow in $colors
+      &-{$color}-{lv}
+        box-shadow: $shadow
+
+$box-default
+  color: $text-01
+  background-color: $ui-01
+  border-radius: $radius.medium
+  border: $border-width.small solid $ui-02
+
+  &--no-radius
+    border-radius: 0
+
+  &--no-border
+    border: 0
+
+  &--primary
+    background-color: $ui-01
+    border-color: $ui-01
+    color: $text-01
+
+  &--info
+    border-left: $border-width.large solid
+    border-left-color: $brand-01
+
+  &--shadow
+    create-box-shadow-classes()
+
+  &--disabled
+    &,
+    > *
+      opacity: 0.5
+
+
+.box
+  @extend $box-default

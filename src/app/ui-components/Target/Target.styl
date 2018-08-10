@@ -1,0 +1,102 @@
+/**
+ * Imports
+ */
+@import "../../../styles/base"
+
+/**
+ * Constants
+ */
+$l = 160px
+
+/**
+ * Default blocks
+ */
+$link-default
+  display: inline-flex
+  flex-direction: row
+  height: $spacing.xl
+  padding: 0 $spacing.xs2
+  background: none
+  border: 0
+
+  color: $brand-01
+  font-size: $font-size.text.sm
+  font-weight: $font-weight.medium
+  line-height: $line-height.text.sm
+  text-decoration: none !important
+
+  cursor: pointer
+
+  &__icn
+    display: inline-flex
+    align-self: center
+    color: inherit
+    transition: all ease-in-out $duration.fast.x2
+
+    &--position-left
+      order: -1
+      margin-right: $spacing.xs
+      transform: translateX(0)
+
+    &--position-right
+      order: 2
+      margin-left: $spacing.xs
+      transform: translateX(0)
+
+  &__label
+    display: inline-flex
+    align-self: center
+    position: relative
+    font-size: inherit
+
+    &:before
+      content: ""
+      position: absolute
+      bottom: 0
+      left: 0
+
+      height: $border-width.small
+      width: 100%
+      background-color: $brand-01
+      border-radius: $radius.medium
+
+      transform: scaleX(0)
+      transition: all ease-in-out $duration.fast.x2
+      visibility: hidden
+
+  &--no-text
+    padding: 0
+
+    & ^[0]__icn
+      margin: 0 !important
+
+  &:hover,
+  &:focus
+    outline: none
+
+    & ^[0]__icn
+      &--position-left
+        transform: translateX(-($spacing.xs2))
+
+      &--position-right
+        transform: translateX($spacing.xs2)
+
+    & ^[0]__label
+      &:before
+        visibility: visible
+        transform: scaleX(1)
+
+  &:disabled,
+  &[disabled="disabled"]
+    opacity: $opacity.level-3
+    cursor: not-allowed
+    pointer-events: none
+
+$link
+  @extend $link-default
+
+/**
+ * Helper class
+ */
+.link
+  @extend $link

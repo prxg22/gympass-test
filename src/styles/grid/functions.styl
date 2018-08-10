@@ -1,0 +1,127 @@
+@import "../tools/mixins.styl"
+@import "./settings.styl"
+
+/**
+ * Generates an object with the max and min viewport widths
+ * to each breakpoint
+ */
+media-queries-generator(bps = breakpoints)
+  queries = {}
+  last = {}
+  for bp, w in bps
+    if last
+      queries[last.bp] = {
+        min: last.w
+        max: w - 1
+      }
+    last = {bp: bp, w: w}
+  queries[last.bp] = {
+    min: last.w
+  }
+  queries
+
+/**
+ * Media min-width declaration
+ */
+min-w(w)
+  if (w is a "unit") && w >= 0
+    " and (min-width: " + w + ")"
+  else
+     ""
+
+/**
+ * Media max-width declaration
+ */
+max-w(w)
+  if (w is a "unit") && w >= 0
+    " and (max-width: " + w + ")"
+  else
+     ""
+queries = media-queries-generator()
+
+/**
+ * Prints block only for specific breakpoint
+ */
+media-content(bp)
+  query = "only screen"
+
+  query += min-w(queries[bp].min)
+  query += max-w(queries[bp].max)
+
+  @media query
+    {block}
+
+/**
+ * Prints block between breakpoints
+ */
+media-range(min-bp, max-bp)
+  query = "only screen"
+
+  query += min-w(queries[min-bp].min)
+  query += max-w(queries[max-bp].max)
+
+  @media query
+    {block}
+
+/**
+ * Prints block above specific breakpoints
+ */
+media-above(bp)
+  query = "only screen"
+
+  query += min-w(queries[bp].max)
+
+  @media query
+    {block}
+
+
+/**
+ * Prints block below specific breakpoints
+ */
+media-below(bp)
+  query = "only screen"
+
+  query += max-w(queries[bp].min - 1)
+
+  @media query
+    {block}
+
+/**
+ * Creates a modifiers in each breakpoint
+ */
+responsive-modifier()
+  for breakpoint in breakpoints
+    +media-content(breakpoint)
+      &-{breakpoint}
+        {block}
+
+rem-calc(value)
+  u = unit(value)
+  if (u is 'rem')
+    return unit(value, u)
+  else
+    return unit(value / base-font-size, 'rem')
+
+
+center(value, pad = null)
+  margin-left: auto
+  margin-right: auto
+  width: 100%
+  u = unit(value)
+  if (u is 'rem' or u is '%')
+    max-width: unit(value, u)
+  else
+    max-width: rem-calc(value)
+  if (pad is null)
+    return
+  else
+    p = unit(pad)
+    if (p is 'rem' or p is '%')
+      padding-left:  unit(pad, p)
+      padding-right:  unit(pad, p)
+    else
+      padding-left: rem-calc(pad)
+      padding-right: rem-calc(pad)
+
+stack()
+  cell(1, 1)

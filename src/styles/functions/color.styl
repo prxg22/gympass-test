@@ -1,0 +1,17 @@
+@import "../tokens/colors.styl"
+
+/**
+* Colors: convert HEX to HSLA or RGBA (built-in Stylus function - most used for absolute values like #ff0000)
+*
+* Usage:
+*
+* .btn
+*   input:
+*     background-color: $color(#ffcc66) or $color($color-variables)
+*   output:
+*     background-color: hsla(40deg, 99.99999999999997%, 70%, 0.5);
+*/
+
+$color(colorValue, opacity = 1)
+  // s('hsla(%s, %s, %s, %s)', hue(colorValue), saturation(colorValue), lightness(colorValue), opacity)
+  return hsla(hue(colorValue), saturation(colorValue), lightness(colorValue), opacity)

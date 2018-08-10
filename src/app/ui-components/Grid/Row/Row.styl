@@ -1,0 +1,154 @@
+@import "../../../../styles/base"
+/**
+ * Functions
+ */
+
+
+/**
+ *  prints grid mains body
+ */
+grid(direction = 'row', cells-align = 'top', justify = '')
+  display: flex
+  flex-wrap: wrap
+
+  if cells-align is 'top'
+    align-items: flex-start
+  if cells-align is 'bottom'
+    align-items: flex-end
+  if cells-align is 'center'
+    align-items: center
+  if cells-align is 'stretch'
+    align-items: stretch
+  if direction is 'row'
+    flex-direction: row
+  if direction is 'row-reverse'
+    flex-direction: row-reverse
+  if direction is 'column'
+    flex-direction: column
+  if direction is 'column-reverse'
+    flex-direction: column-reverse
+  if justify is 'center'
+    justify-content: center
+  if justify is 'start'
+    justify-content: flex-start
+  if justify is 'end'
+    justify-content: flex-end
+
+/**
+ * Default blocks
+ */
+
+
+/**
+ * Row default block
+ */
+$row-default
+  grid(direction: 'row')
+
+$row
+  @extend $row-default
+
+  /**
+   * Modifiers
+   */
+
+
+  // row alignment
+  &--top
+    align-items: flex-start
+
+    +responsive-modifier()
+        align-items: flex-start !important
+
+  &--bottom
+    align-items: flex-end
+
+    +responsive-modifier()
+        align-items: flex-end !important
+
+  &--center
+    align-items: center
+
+    +responsive-modifier()
+        align-items: center !important
+
+  &--stretch
+    align-items: stretch
+
+    +responsive-modifier()
+        align-items: stretch !important
+
+  // row justify
+  &--justify-center
+    justify-content: center
+
+    +responsive-modifier()
+      justify-content: center !important
+
+  &--justify-start
+    justify-content: flex-start
+
+    +responsive-modifier()
+      justify-content: flex-start !important
+
+  &--justify-end
+    justify-content: flex-end
+
+    +responsive-modifier()
+      justify-content: flex-end !important
+
+
+  // row direction
+  &--reverse
+    flex-direction: row-reverse
+
+    +responsive-modifier()
+      flex-direction: row-reverse !important
+
+  // row fluid modifiers
+  &--fluid
+    flex-wrap: nowrap
+    overflow-x: auto
+    justify-content: start !important
+    padding-right: 40px
+
+    &:after
+      content: ''
+      display: flex
+      flex: 0 0 15px
+      margin: 15px 0
+      min-height: 15px
+
+
+    > *:last-child
+      margin-right: 0
+
+    +responsive-modifier()
+      flex-wrap: nowrap
+      overflow-x: auto
+      justify-content: start !important
+      padding-right: 40px
+
+      &:after
+        content: ''
+        display: flex
+        flex: 0 0 15px
+        margin: 15px 0
+        min-height: 15px
+
+
+      > *:last-child
+        margin-right: 0
+
+  +media-content(xs)
+    &--fluid-xs
+      &:after
+        flex: 0 0 rem-calc(20px)
+        margin: rem-calc(20px) 0
+        min-height: rem-calc(20px)
+
+/**
+ * Helper class
+ */
+.row
+  @extends $row

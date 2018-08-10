@@ -1,0 +1,98 @@
+@import "../../../styles/base.styl"
+
+@keyframes entrie
+    0%
+      top: -100vh
+
+    55%
+      top: $spacing.md
+
+    100%
+      top: 0
+
+@keyframes exit
+    0%
+      top: 0
+
+    45%
+      top: $spacing.md
+
+    100%
+      top: -100vh
+
+$modal
+  display: flex
+  max-height: 90vh
+  min-height: 50vh
+  position: relative
+  flex-direction: column
+  justify-content: space-between
+  animation-name: entrie
+  animation-duration: $duration.medium.x2
+
+
+  &__background
+    min-height: 100vh
+    overflow-y: hidden
+    position: fixed
+    width: 100%
+
+    & > *:not(^[0]__wrapper)
+      filter: blur(4px)
+
+  &__wrapper
+    background-color: $color(#000, $opacity.level-8)
+    height: 100vh
+
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+
+    z-index: $z-index.modal
+
+  &__content
+    overflow-y: scroll;
+    -ms-overflow-style: none  // IE 10+
+    overflow-y: -moz-scrollbars-none  // Firefox
+
+    &::-webkit-scrollbar
+      display: none  // Safari and Chrome
+
+  &__header
+    display: flex
+    justify-content: flex-end
+    padding-top: $spacing.xs
+    position: relative
+    z-index: $z-index.modal + 1
+
+    & ^[0]__close-button
+      color: $brand-01
+      padding-right: $spacing.xs
+
+
+  &__body
+    margin-top: -($spacing.xl)
+
+  &__footer
+    background-color: $ui-02
+    padding: $spacing.md
+    border-radius: 0 0 $radius.medium $radius.medium
+    text-align: right
+
+
+  &--closing
+    animation-name: exit
+    animation-duration: $duration.medium.x2
+
+  +media-below('md')
+    max-height: s('calc(100vh - %s)', $spacing.xl)
+    min-height: calc(100vh - 32px)
+
+    &__header
+      padding: $spacing.xs $spacing.xs 0 0
+
+
+.modal
+  @extend $modal

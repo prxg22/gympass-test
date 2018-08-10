@@ -1,0 +1,39 @@
+@import "../../../styles/base.styl"
+
+$input
+  border: 0
+  font-size: 1rem
+  border-bottom: $border-width.small solid $text-01
+  outline: transparent
+  transition: all $duration.medium.x1 ease
+
+  &:focus
+    border-bottom: $border-width.medium solid $brand-01
+
+  &:invalid
+    border-botom: $border-width.medium solid $support.error
+
+  &--error
+    border-bottom: $border-width.medium solid $support.error
+    margin-bottom: $spacing.sm
+    position: relative
+
+  &__error
+    display: none
+
+    &--active
+      display: inline
+      position: absolute
+      color: $support.error
+      top: s("calc(%s + %s)", 100%, $spacing.xs2)
+      left: $spacing.xs2
+      font-size: $font-size.text.xs
+
+  &__container
+    display: inline
+    position: relative
+
+
+
+.input
+  @extends $input

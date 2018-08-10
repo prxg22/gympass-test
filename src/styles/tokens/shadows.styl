@@ -1,0 +1,39 @@
+@import "./colors"
+@import "../functions/color"
+
+// Color values
+$shadow-03 = $text-02
+
+
+// Depth values
+$level-1 = 0 4px 8px 0
+$level-2 = 0 8px 16px 0
+$level-3 = 0 16px 24px 0
+$level-4 = 0 24px 48px 0
+
+
+// Opacity value
+$shadow-opacity = 16%
+
+/**
+ * Default box shadow [prefix: shadow]
+ * Getter example:
+ * .card {box-shadow: shadow.level-1.blue}
+ *
+ * Getter example
+ * .card {box-shadow: $shadow.level-4.dark // 0 24px 48px shadow.dark}
+ */
+$shadows = {
+  level-1: {
+    grey: $level-1 $color($shadow-03, $shadow-opacity)
+  },
+  level-2: {
+    grey: $level-2 $color($shadow-03, $shadow-opacity)
+  },
+  level-3: {
+    grey: $level-3 $color($shadow-03, $shadow-opacity)
+  },
+  level-4: {
+    grey: $level-4 $color($shadow-03, $shadow-opacity)
+  }
+}

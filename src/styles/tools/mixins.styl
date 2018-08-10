@@ -1,0 +1,64 @@
+// Mixins
+
+// Typography
+
+// font-size($font-value = $base-font-size, $base-font-value = $base-font-size, $base-line-value = $base-line-height)
+//   font-size: $font-value px
+//   font-size: ($font-value / $base-font-value) rem
+//   line-height: ($font-value / $base-font-value) * $base-line-value
+//   line-height: ($base-line-value / $base-font-value) * ($font-value / $base-font-value) rem
+
+@import "../tokens/z-index"
+
+/*
+* Resets
+*/
+
+reset-margin-y()
+  margin-top: m = 0
+  margin-bottom: m
+
+/*
+* Border radius - custom values for single corners
+*/
+
+custom-radius(tl, tr, br, bl)
+  border-top-left-radius: unit(tl, 'px')
+  border-top-right-radius: unit(tr, 'px')
+  border-bottom-right-radius: unit(br, 'px')
+  border-bottom-left-radius: unit(bl, 'px')
+
+/*
+* Breakpoints
+*/
+
+media-range(min, max)
+  @media screen and (min-width: min) and (max-width: max - 1)
+    {block}
+
+media-only(containerWidth)
+  @media screen and (width: containerWidth)
+    {block}
+
+media-above(containerWidth)
+  @media screen and (min-width: containerWidth)
+    {block}
+
+media-below(containerWidth)
+  @media screen and (max-width: containerWidth)
+    {block}
+
+/*
+* Flex fluid: for adjust component width and activate overflow-x: scroll at row fluid
+*/
+
+scroll-x-row()
+  flex-grow: f = 0
+  flex-shrink: f
+
+/*
+* Z-index levels
+*/
+
+z-axis(key)
+  z-index: $z-index[key]

@@ -1,0 +1,77 @@
+/**
+ * Font family
+ * Getter example:
+ * .title {font-family: $font-family-heading}
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans')
+
+$font-family-heading = Helvetica, sans-serif
+$font-family-text = 'Open Sans', sans-serif
+
+/**
+ * Font weight
+ * Getter example:
+ * .title {font-weight: $font-weight.bold}
+ */
+$font-weight = {
+  regular: normal,
+  medium : 500,
+  bold   : 700
+}
+
+/**
+ * Font size
+ * Getter example:
+ * .caption {font-size: $font-size.text.sm}
+ */
+$font-size = {
+  heading: {
+    xs2: 0.875rem,   // 14px
+    xs : 1.125rem,  // 18px
+    sm : 1.375rem,   // 22px
+    md : 2rem,       // 32px
+    lg : 2.5rem,     // 40px
+    xl : 3.375rem,   // 54px
+    xl2: 5.125rem,  // 82px
+  },
+  text: {
+    xs : 0.625rem,   // 10px
+    sm : 0.75rem,    // 12px
+    md : 0.875rem,   // 14px
+    lg : 1.125rem,   // 18px
+  }
+}
+
+/**
+ * Line height
+ * Getter example:
+ * .caption {line-height: $line-height.text.xs}
+ * p {line-height: $line-height.text.md}
+ */
+$line-height = {
+  heading: {
+    xs2: 1rem,    // 16px
+    xs : 1.5rem,  // 24px
+    sm : 1.75rem, // 28px
+    md : 2.5rem,  // 40px
+    lg : 3rem,    // 48px
+    xl : 4rem,    // 64px
+    xl2: 5.5rem   // 88px
+  },
+  text: {
+    xs:  0.875rem, // 14px - tinny
+    sm:  1rem,     // 16px - caption
+    md:  1.125rem, // 18px - paragraph
+    lg:  1.5rem    // 24px - default
+    xl:  2rem      // 32px
+    xl2: 2.5rem    // 40px
+  }
+}
+
+/**
+ * Letter spacing
+ * Getter example:
+ * .title {letter-spacing: $letter-spacing-negative}
+ */
+$letter-spacing-negative = -0.5px

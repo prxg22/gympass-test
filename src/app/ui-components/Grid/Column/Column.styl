@@ -1,0 +1,117 @@
+@import "../../../../styles/base"
+/**
+ * Functions
+ */
+
+/**
+ * Creates grid column classes
+ */
+cell(i = 1, cols = columns, sub = 0, align = '', g = gutter)
+  scroll-x-row()
+
+  min = 0
+  max = s('calc(100% * %s)', i / cols)
+
+  if g is not 0 && sub is 0
+    min = s('calc(100% * %s - %s)', i / cols, rem-calc(g))
+    max = s('calc(100% * %s)', i / cols)
+
+  else if g is not 0 && sub is not 0
+    min = s('calc(100% * %s - %s - %s)', i / cols, rem-calc(g), sub)
+    max = s('calc(100% * %s - %s)', i / cols, sub)
+
+
+  min-width: min
+  max-width: max
+  width: 0
+
+  if g is not 0
+    margin: 0 rem-calc(g / 2)
+  if align is 'top'
+    align-self: flex-start
+  if align is 'bottom'
+    align-self: flex-end
+  if align is 'center'
+    align-self: center
+
+/**
+ * Creates col-offset classes
+ */
+cell-offset(i = 1, cols = columns, sub = 0, g = gutter)
+  if g is not 0
+    margin-left: s('calc(100% * %s + (%s / 2))', i / cols, rem-calc(g)) !important
+  else
+    margin-left: s('calc(100% * %s)', i / cols) !important
+
+/*
+ * Grid cell classes
+ */
+grid-cell-classes-generator(cols = columns, sub = 0, g = gutter, cellClass = col)
+  [class^=col]
+    width: 100%
+
+  .col
+    cell(cols, cols, sub, g)
+    for key, value in breakpoints
+      @media screen and (min-width: value)
+        for i in range(1, cols, 1)
+          &-{key}-{i}
+              cell(i, cols, sub, g)
+          &--offset-{key}-{i}
+              cell-offset(i, cols, sub, g)
+
+
+/**
+ * Default Blocks
+ */
+
+$col
+  // cell alignment modifiers
+  &--top
+    align-self: flex-start
+
+    +responsive-modifier()
+      align-self: flex-start !important
+
+  &--bottom
+    align-self: flex-end
+
+    +responsive-modifier()
+      align-self: flex-end !important
+
+  &--center
+    align-self: center
+
+    +responsive-modifier()
+      align-self: center !important
+
+  &--stretch
+    align-self: stretch
+
+    +responsive-modifier()
+      align-self: stretch !important
+
+  &--no-gutter
+    width: 100% !important
+    margin-left: 0 !important
+    margin-right: 0 !important
+
+    +responsive-modifier()
+      width: 100% !important
+      margin-left: 0 !important
+      margin-right: 0 !important
+
+
+  // col hide
+  &--hidden
+    display: none
+    visibility: hidden
+
+    +responsive-modifier()
+      display: none !important
+      visibility: hidden !important
+
+grid-cell-classes-generator()
+
+.col
+  @extends $col
