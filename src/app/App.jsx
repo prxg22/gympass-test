@@ -10,11 +10,11 @@ import createHistory from 'history/createBrowserHistory'
 import { Container } from './ui-components/Grid'
 import { Home, Repos } from './pages'
 import { reducer } from './reducers'
-
+import { authenticate } from './services/githubAPI'
+import * as config from '../../config.json'
 import style from './App.styl'
 
 const history = createHistory({ basename: '/' })
-
 
 const composedEhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const configureStore = () => createStore(
@@ -24,6 +24,8 @@ const configureStore = () => createStore(
 )
 
 const store = configureStore()
+
+if (config.GITHUB_USER && config.GITHUB_TOKEN) authenticate(config.GITHUB_USER, config.GITHUB_TOKEN)
 
 const App = () => (
     <Container className={style.app} fluid>

@@ -37,7 +37,7 @@ class Home extends React.Component {
         return (
             <UserBox
                 onChange={(u) => { this.username = u || username }}
-                onSubmit={() => dispatch(HomeActions.getUserRepos(this.username))}
+                onSubmit={() => dispatch(HomeActions.getRepos(this.username))}
                 errorMsg={error ? error.message : ''}
             />
         )

@@ -10,9 +10,6 @@ import Target from '../../../ui-components/Target'
 // types
 import { RepoPropType } from '../../../types'
 
-// components
-import TagGroup from './TagGroup'
-
 // style
 import style from './RepoItem.styl'
 
@@ -24,7 +21,7 @@ import style from './RepoItem.styl'
  *  @param {Function} props.onClick if edit button of one repository is click this event is triggered with the repo as attr
  */
 const RepoItem = ({ repo, onClick }) => {
-    const { name, languages, tags } = repo
+    const { name} = repo
     return (
         <Box
             className={style['repo-item']}
@@ -34,13 +31,10 @@ const RepoItem = ({ repo, onClick }) => {
             <Row alignCenter>
                 <div>
                     <h4 className={style['repo-item__title']}>{name}</h4>
-                    <p className="caption">{languages.join(', ')}</p>
                 </div>
                 <div className={style['repo-item__tags']} >
-                    <TagGroup tags={tags} />
                 </div>
                 <div>
-                    <Target icon="edit" onClick={() => onClick && onClick(repo)} />
                 </div>
             </Row>
         </Box>

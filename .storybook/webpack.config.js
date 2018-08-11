@@ -9,7 +9,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: path.resolve(__dirname, '..', 'src/'),
+        include: path.resolve(__dirname, '..', 'src/app/ui-components'),
         exclude: /story/,
         options: {
           formatter: require('eslint-friendly-formatter'),

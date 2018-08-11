@@ -10,7 +10,6 @@ import Container from '../Grid/Container'
 import Row from '../Grid/Row'
 import Column from '../Grid/Column'
 import Button from '../Button'
-import Link from '../Link'
 import Box from '../Box'
 
 import Modal from './Modal'
@@ -23,7 +22,7 @@ storiesOf('Modal', module)
     .add(
         'default',
         withInfo({
-            propTablesExclude: [Container, Row, Column, Button, Link, Box, State],
+            propTablesExclude: [Container, Row, Column, Button, Box, State],
             text: 'Use attribute data-modal-footer',
         })(() => (
             <Row>
@@ -46,12 +45,12 @@ storiesOf('Modal', module)
                             </Row>
                             <Row data-modal-footer>
                                 <Column align="right" noGutter>
-                                    <Link
+                                    <a
                                         style={{ marginRight: 8 }}
                                         onClick={() => store.set({ isOpen: false })}
                                     >
                                             Cancelar
-                                    </Link>
+                                    </a>
                                     <Button
                                         onClick={() => store.set({ isOpen: false })}
                                     >

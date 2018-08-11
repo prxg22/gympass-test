@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router'
-import { brainnAPI } from '../services'
+import { getRepos as get } from '../services/githubAPI'
 import Repos from './Repos'
 
 const reset = () => (dispatch, getState) => {
@@ -16,7 +16,7 @@ const reset = () => (dispatch, getState) => {
 }
 
 
-const getUserRepos = (username) => {
+const getRepos = (username) => {
     if (!username) return false
 
     return (dispatch, getState) => {
@@ -29,7 +29,7 @@ const getUserRepos = (username) => {
 
         if (location.pathname && location.pathname !== '/') dispatch(push('/'))
 
-        return brainnAPI.getUserRepos(username)
+        return get(username)
             .then((repos) => {
                 dispatch(Repos.listRepos(username, repos))
                 return dispatch({
@@ -47,6 +47,6 @@ const getUserRepos = (username) => {
 
 
 export default {
-    getUserRepos,
+    getRepos,
     reset,
 }

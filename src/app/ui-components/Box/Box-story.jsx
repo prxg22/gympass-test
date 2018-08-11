@@ -30,7 +30,7 @@ storiesOf('Box', module)
 
             const noRadiusValue = boolean('No Radius', false, groups.style)
             const noBorderValue = boolean('No Border', false, groups.style)
-            const shadowColorValue = text('Shadow Color', '', groups.style)
+            const shadowColorValue = boolean('Shadow', false, groups.style)
 
             const shadowLevelValue = number('Shadow Level', 1, {
                 range: true,
@@ -50,14 +50,11 @@ storiesOf('Box', module)
                         >
                             <Box
                                 style={{ minHeight: 200, textAlign: 'center' }}
-                                theme={themeValue}
                                 status={statusValue}
                                 noRadius={noRadiusValue}
                                 noBorder={noBorderValue}
-                                shadow={formatShadow(shadowColorValue, shadowLevelValue)}
-                                backgroundUrl={backgroundImage ? 'images/bg-product-highlight.png' : ''}
+                                shadow={formatShadow(shadowColorValue ? 'grey' : '', shadowLevelValue)}
                                 disabled={boolean('Disabled', false, groups.style)}
-                                backgroundOpacity={backgroundOpacityValue}
                             >
                                 <h3>I'm a box!</h3>
                             </Box>

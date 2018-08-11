@@ -1,0 +1,48 @@
+/**
+ * Imports
+ */
+@import "../../../styles/base"
+
+@keyframes expand
+  0%
+    opacity: 0
+    top: -($spacing.xs)
+
+  50%
+    opacity: 0.1
+
+  75%
+    top: $spacing.xs
+
+  100%
+    top: 0
+    opacity: 1
+
+@keyframes collapse
+  25%
+    top: $spacing.xs
+
+  50%
+    opacity: 0.1
+
+  100%
+    opacity: 0
+    top: -($spacing.xs)
+
+
+$collapse
+  position: relative
+
+  &__header
+    cursor: pointer
+
+  &__body
+    position: relative
+    animation: expand $duration.fast.x2 ease-in
+
+  &--closing
+    & ^[0]__body
+      animation: collapse $duration.fast.x2 ease-in
+
+.collapse
+  @extends $collapse

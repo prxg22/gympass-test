@@ -49,7 +49,7 @@ class Repos extends React.Component {
         // checks if has username or path to show list, if not reset app
         if (!username && pathname) this.resolvePath(pathname)
         else if (!username) dispatch(HomeActions.reset())
-        else if (username && (!repos || repos.length < 1)) dispatch(HomeActions.getUserRepos(username))
+        else if (username && (!repos || repos.length < 1)) dispatch(HomeActions.getRepos(username))
 
         return true
     }
@@ -57,7 +57,7 @@ class Repos extends React.Component {
     resolvePath(path) {
         const { dispatch } = this.props
         const arr = path.split('/')
-        if (arr[1] === 'repos' && arr[2] && typeof arr[2] === 'string') dispatch(HomeActions.getUserRepos(arr[2]))
+        if (arr[1] === 'repos' && arr[2] && typeof arr[2] === 'string') dispatch(HomeActions.getRepos(arr[2]))
     }
 
     handleTagSubmit(t) {
