@@ -5,24 +5,21 @@ import { connect } from 'react-redux'
 
 // ui
 import Loader from '../../ui-components/Loader'
-import Modal from '../../ui-components/Modal'
 
 // types
 import { RepoPropType } from '../../types'
 
 // actions
-import { Home as HomeActions, Repos as ReposActions } from '../../actions'
+import { ReposActions, HomeActions } from '../../actions'
 
 // components
-import { ReposList, EditTag } from './components'
+import { ReposList } from './components'
 
 class Repos extends React.Component {
     static propTypes = {
         repos: PropTypes.arrayOf(RepoPropType),
-        tags: PropTypes.arrayOf(PropTypes.string),
         username: PropTypes.string,
         isLoading: PropTypes.bool,
-        _id: PropTypes.string,
         router: PropTypes.shape({ location: PropTypes.string }),
         dispatch: PropTypes.func.isRequired,
     }
@@ -30,9 +27,7 @@ class Repos extends React.Component {
     static defaultProps = {
         username: '',
         repos: [],
-        tags: [],
         isLoading: false,
-        _id: '',
         router: null,
     }
 
@@ -49,27 +44,19 @@ class Repos extends React.Component {
         // checks if has username or path to show list, if not reset app
         if (!username && pathname) this.resolvePath(pathname)
         else if (!username) dispatch(HomeActions.reset())
-        else if (username && (!repos || repos.length < 1)) dispatch(HomeActions.getRepos(username))
-
-        return true
+        else if (username && (!repos || repos.length < 1)) dispatch(ReposActions.getRepos(username))
     }
 
     resolvePath(path) {
         const { dispatch } = this.props
         const arr = path.split('/')
-        if (arr[1] === 'repos' && arr[2] && typeof arr[2] === 'string') dispatch(HomeActions.getRepos(arr[2]))
-    }
-
-    handleTagSubmit(t) {
-        this.props.dispatch(ReposActions.updateRepoTags(this.props._id, t))
+        if (arr[1] === 'repos' && arr[2] && typeof arr[2] === 'string') dispatch(ReposActions.getRepos(arr[2]))
     }
 
     render() {
         const {
             repos,
-            _id,
             isLoading,
-            tags,
             dispatch,
         } = this.props
 
@@ -81,15 +68,10 @@ class Repos extends React.Component {
         return (
             <div>
                 <ReposList
-                    onClick={repo => dispatch(ReposActions.openModal(repo))}
+                    onOpen={(index) => dispatch(ReposActions.openRepo(index))}
+                    onClose={(index) => dispatch(ReposActions.closeRepo(index))}
                     repos={repos}
                 />
-                <Modal
-                    isOpen={_id && tags}
-                    onClose={() => dispatch(ReposActions.closeModal())}
-                >
-                    <EditTag tags={tags} onSubmit={t => this.handleTagSubmit(t)}/>
-                </Modal>
             </div>
         )
     }
@@ -100,8 +82,6 @@ const mapStateToProps = (state) => {
         username,
         repos,
         _id,
-        tags,
-        searchedTags,
         error,
         isLoading,
         router,
@@ -110,9 +90,7 @@ const mapStateToProps = (state) => {
     return {
         username,
         repos,
-        tags,
         _id,
-        searchedTags,
         error,
         isLoading,
         router,

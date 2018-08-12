@@ -1,4 +1,7 @@
-import Home from './Home'
-import Repos from './Repos'
+import HomeActions from './Home'
+import ReposActions from './Repos'
 
-export { Home, Repos }
+export {
+    HomeActions,
+    ReposActions,
+}

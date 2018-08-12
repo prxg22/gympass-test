@@ -1,11 +1,9 @@
 import RepoItem from './RepoItem'
 import ReposList from './ReposList'
-import TagGroup from './TagGroup'
-import EditTag from './EditTag'
+import CommitsList from './CommitsList'
 
 export {
     RepoItem,
     ReposList,
-    TagGroup,
-    EditTag,
+    CommitsList,
 }

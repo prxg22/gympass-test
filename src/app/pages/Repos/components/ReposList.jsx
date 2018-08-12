@@ -21,11 +21,16 @@ import style from './RepoList.styl'
  *  @param {Array<Repo>} props.repos repos to be rendered
  *  @param {Function} props.onClick if edit button of one repository is click this event is triggered with the repo as attr
  */
-const ReposList = ({ repos, onClick }) => (
+const ReposList = ({ repos, onOpen, onClose }) => (
     <Row className={style['repo-list']} justifyCenter>
-        {repos.map(repo => (
+        {repos.map((repo, index) => (
             <Column cols={{ xs: 10 }}>
-                <RepoItem repo={repo} onClick={r => onClick && onClick(r)} />
+                <RepoItem
+                    index={index}
+                    repo={repo}
+                    onOpen={(index) => onOpen && onOpen(index)}
+                    onClose={(index) => onClose && onClose(index)}
+                />
             </Column>
         ))}
     </Row>
@@ -33,11 +38,13 @@ const ReposList = ({ repos, onClick }) => (
 
 ReposList.propTypes = {
     repos: PropTypes.arrayOf(RepoPropType).isRequired,
-    onClick: PropTypes.func,
+    onOpen: PropTypes.func,
+    onClose: PropTypes.func,
 }
 
 ReposList.defaultProps = {
-    onClick: null,
+    onOpen: null,
+    onClose: null,
 }
 
 export default ReposList

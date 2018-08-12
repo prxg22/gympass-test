@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { Home as HomeActions } from '../../actions'
+import { HomeActions } from '../../actions'
 
 import UserBox from './components/UserBox'
 import Loader from '../../ui-components/Loader'
@@ -29,15 +29,10 @@ class Home extends React.Component {
             dispatch,
         } = this.props
 
-
-        if (isLoading) {
-            return (<Loader />)
-        }
-
         return (
             <UserBox
                 onChange={(u) => { this.username = u || username }}
-                onSubmit={() => dispatch(HomeActions.getRepos(this.username))}
+                onSubmit={() => dispatch(HomeActions.submitUser(this.username))}
                 errorMsg={error ? error.message : ''}
             />
         )

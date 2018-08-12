@@ -10,6 +10,7 @@ export const reducer = (state = initialState, action) => {
     case 'FETCH_REPOS':
         return {
             ...state,
+            repos: [],
             isLoading: true,
             username: action.username,
         }
@@ -26,36 +27,23 @@ export const reducer = (state = initialState, action) => {
             isLoading: false,
             error: action.error,
         }
-    case 'LIST_REPOS':
+    case 'FETCH_COMMITS':
         return {
             ...state,
-            username: action.username,
+            index: action.index
+        }
+
+    case 'FETCH_COMMITS_SUCCESS':
+        return {
+            ...state,
             repos: action.repos,
         }
-    case 'REPO_TAG':
+
+    case 'FETCH_COMMITS_ERROR':
         return {
             ...state,
-            _id: action._id,
-            tags: action.tags,
-        }
-    case 'UPDATE_TAG_SUCCESS':
-        return {
-            ...state,
-            _id: action._id,
-            tags: action.tags,
-        }
-    case 'ERROR_TAG_SUCCESS':
-        return {
-            ...state,
-            _id: action._id,
-            tags: action.tags,
-            error: action.error
-        }
-    case 'CLOSE_MODAL':
-        return {
-            ...state,
-            _id: action._id,
-            tags: action.tags,
+            repos: action.repos,
+            error: action.error,
         }
 
     default:

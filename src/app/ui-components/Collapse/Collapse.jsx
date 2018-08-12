@@ -20,6 +20,7 @@ const reduceChildren = children => children.reduce((content, child) => {
     return { ...content, body: child }
 }, INITIAL_CONTENT)
 
+
 class Collapse extends Component {
     static propTypes = {
         /**
@@ -28,12 +29,17 @@ class Collapse extends Component {
         children: PropTypes.arrayOf(PropTypes.node).isRequired,
 
         /**
-         * Callback which will be called on open action
+         * Callback which will be called on open action. Should change isOpen
+         */
+        isOpen: PropTypes.boolean,
+
+        /**
+         * Callback which will be called on open action. Should change isOpen
          */
         onOpen: PropTypes.func,
 
         /**
-         * Callback which will be called on close action
+         * Callback which will be called on close action. Should change isOpen
          */
         onClose: PropTypes.func,
 
@@ -54,18 +60,7 @@ class Collapse extends Component {
         className: '',
         onOpen: null,
         onClose: null,
-    }
-
-    state = {
-        /**
-         * indicates if body is opened or not
-         */
-        open: false,
-
-        /**
-         * indicates the closing animation state
-         */
-        closing: false,
+        isOpen: false,
     }
 
     componentDidMount = () => {
@@ -89,11 +84,11 @@ class Collapse extends Component {
      * Sets content object and updates state
      */
     set content(children) {
-        const { state } = this
+        const { isOpen, onOpen, onClose } = this.props
 
-        this._content = reduceChildren(children, () => this.toggle())
+        this._content = reduceChildren(children, () => { isOpen ? onClose() : onOpen() })
 
-        this.setState(state)
+        this.setState({ ...this.state })
     }
 
     /**
@@ -101,49 +96,51 @@ class Collapse extends Component {
      */
     _content = INITIAL_CONTENT
 
-    /**
-     * Toggles collapse's body
-     */
-    toggle = () => {
-        const { state, props } = this
-        const { onOpen, onClose } = props
-
-        const nextState = { open: !state.open, closing: false }
-
-        let animation = null
-
-        if (state.open) {
-            animation = { closing: true }
-        }
-
-        this.setState(animation || nextState, () => {
-            if (!state.open && onOpen) onOpen()
-            if (state.open && onClose) onClose()
-
-            if (!animation) return null
-            if (!global.window) return this.setState(nextState)
-
-            return global.window.setTimeout(() => this.setState(nextState), 200)
-        })
-    }
+    // /**
+    //  * Toggles collapse's body
+    //  */
+    // toggle = () => {
+    //     const { state, props } = this
+    //     const { onOpen, onClose } = props
+    //
+    //     const nextState = { open: !state.open, closing: false }
+    //
+    //     let animation = null
+    //
+    //     if (state.open) {
+    //         animation = { closing: true }
+    //     }
+    //
+    //     this.setState(animation || nextState, () => {
+    //         if (!state.open && onOpen) onOpen()
+    //         if (state.open && onClose) onClose()
+    //
+    //         if (!animation) return null
+    //         if (!global.window) return this.setState(nextState)
+    //
+    //         return global.window.setTimeout(() => this.setState(nextState), 200)
+    //     })
+    // }
 
     renderHeader = () => {
         const { header } = this.content
+        const { isOpen, onOpen, onClose } = this.props
 
         if (!header) return null
 
         return React.cloneElement(header, {
             className: classnames(header.className, style.collapse__header),
-            onClick: () => this.toggle(),
+            onClick: () => { isOpen ? onClose() : onOpen() },
             role: 'button',
         })
     }
 
     renderBody = () => {
-        const { state, content } = this
+        const { props, content } = this
         const { body } = content
+        const { isOpen } = props
 
-        if (!body || !state.open) return null
+        if (!body || !isOpen) return null
 
         return React.cloneElement(body, {
             className: classnames(
@@ -169,13 +166,14 @@ class Collapse extends Component {
             getRef,
             className,
             children,
+            isOpen,
             ...others
         } = props
 
         const classes = classnames(
             style.collapse,
             {
-                [style['collapse--closing']]: state.closing,
+                [style['collapse--closing']]: !isOpen,
             },
             className,
         )

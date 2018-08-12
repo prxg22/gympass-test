@@ -30,7 +30,7 @@ if (config.GITHUB_USER && config.GITHUB_TOKEN) authenticate(config.GITHUB_USER, 
 const App = () => (
     <Container className={style.app} fluid>
         <div className={style.app__title}>
-            <h1 className={style.home__title}>githubstars</h1>
+            <h1 className={style.home__title}>gympass</h1>
         </div>
         <Provider store={store}>
             <ConnectedRouter history={history}>
