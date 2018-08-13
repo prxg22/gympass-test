@@ -13,7 +13,7 @@ import { RepoPropType } from '../../types'
 import { ReposActions, HomeActions } from '../../actions'
 
 // components
-import { ReposList } from './components'
+import ReposList from '../../ui-components/ReposList'
 
 class Repos extends React.Component {
     static propTypes = {
@@ -61,15 +61,13 @@ class Repos extends React.Component {
         } = this.props
 
 
-        if (isLoading) {
-            return (<Loader />)
-        }
+        if (isLoading) return (<Loader />)
 
         return (
             <div>
                 <ReposList
-                    onOpen={(index) => dispatch(ReposActions.openRepo(index))}
-                    onClose={(index) => dispatch(ReposActions.closeRepo(index))}
+                    onOpen={i => dispatch(ReposActions.openRepo(i))}
+                    onClose={i => dispatch(ReposActions.closeRepo(i))}
                     repos={repos}
                 />
             </div>

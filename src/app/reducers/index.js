@@ -30,7 +30,7 @@ export const reducer = (state = initialState, action) => {
     case 'FETCH_COMMITS':
         return {
             ...state,
-            index: action.index
+            index: action.index,
         }
 
     case 'FETCH_COMMITS_SUCCESS':

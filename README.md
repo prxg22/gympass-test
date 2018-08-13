@@ -27,3 +27,10 @@ Run storybook on `src/ui-components`
 ```
 
 Storybook wlll start on `http://localhost:9001`
+
+## ES6+ features
+### Arrow Functions
+Arrow functions allows the user to create lightweight closure in runtime
+
+### Template strings
+Template strings allows the user to embed expressions inside string literals, helping readability and writability.  

@@ -8,31 +8,31 @@ import { fetchCommits, fetchRepos } from '../services/githubAPI'
  * @param {String} username
  * @param {Array<Repo>} repos
  */
-const getRepos = (username) => {
-    return (dispatch, getState) => {
-        dispatch({ type: 'FETCH_REPOS' })
+const getRepos = (username) => (dispatch) => {
+    dispatch({ type: 'FETCH_REPOS' })
 
-        return fetchRepos(username)
-            .then(repos => dispatch({
-                type: 'FETCH_REPOS_SUCCESS',
-                repos,
-            }))
-            .catch(error => {
-                dispatch(push('/'))
-                return dispatch({
-                    type: 'FETCH_REPOS_ERROR',
-                    error,
-                })
+    return fetchRepos(username)
+        .then((repos) => dispatch({
+            type: 'FETCH_REPOS_SUCCESS',
+            repos,
+        }))
+        .catch((error) => {
+            dispatch(push('/'))
+            return dispatch({
+                type: 'FETCH_REPOS_ERROR',
+                error,
             })
-    }
+        })
 }
 
-const openRepo = (index) => (dispatch, getState) => {
-    let repos = [...getState().repos]
-    if (index < 0 || index > repos.length - 1) return dispatch({
-        type: 'FETCH_COMMITS_ERROR',
-        error: new Error('index out of boundaries!')
-    })
+const openRepo = index => (dispatch, getState) => {
+    const repos = [...getState().repos]
+    if (index < 0 || index > repos.length - 1) {
+        return dispatch({
+            type: 'FETCH_COMMITS_ERROR',
+            error: new Error('index out of boundaries!'),
+        })
+    }
 
     repos[index].isOpen = true
     repos[index].commits = null
@@ -40,7 +40,7 @@ const openRepo = (index) => (dispatch, getState) => {
 
     dispatch({
         type: 'FETCH_COMMITS',
-        repos
+        repos,
     })
 
     const repo = repos[index]
@@ -62,19 +62,21 @@ const openRepo = (index) => (dispatch, getState) => {
         }))
 }
 
-const closeRepo = (index) => (dispatch, getState) => {
+const closeRepo = index => (dispatch, getState) => {
     const repos = [...getState().repos]
-    if (index < 0 || index > repos.length - 1) return dispatch({
-        type: 'FETCH_COMMITS_ERROR',
-        error: new Error('index out of boundaries!')
-    })
+    if (index < 0 || index > repos.length - 1) {
+        return dispatch({
+            type: 'FETCH_COMMITS_ERROR',
+            error: new Error('index out of boundaries!'),
+        })
+    }
 
     const repo = repos[index]
     repo.isOpen = false
 
-    dispatch({
+    return dispatch({
         type: 'FETCH_COMMITS_SUCCESS',
-        repos
+        repos,
     })
 }
 

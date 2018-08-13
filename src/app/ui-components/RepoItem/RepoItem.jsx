@@ -3,17 +3,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // ui
-import { Row } from '../../../ui-components/Grid'
-import Box from '../../../ui-components/Box'
-import Target from '../../../ui-components/Target'
-import Collapse from '../../../ui-components/Collapse'
-import Icon from '../../../ui-components/Icon'
-
-// components
-import CommitsList from './CommitsList'
+import { Row } from '../Grid'
+import Box from '../Box'
+import Collapse from '../Collapse'
+import Icon from '../Icon'
+import CommitsList from '../CommitsList'
 
 // types
-import { RepoPropType } from '../../../types'
+import { RepoPropType } from '../../types'
 
 // style
 import style from './RepoItem.styl'
@@ -25,14 +22,19 @@ import style from './RepoItem.styl'
  *  @param {Array<Repo>} props.repo repo to be rendered
  *  @param {Function} props.onClick if edit button of one repository is click this event is triggered with the repo as attr
  */
-const RepoItem = ({ repo, onClose, onOpen, index }) => {
+const RepoItem = ({
+    repo,
+    onClose,
+    onOpen,
+    index,
+}) => {
     const {
         name,
         stargazers_count,
         watchers_count,
         forks_count,
         commits,
-        isOpen
+        isOpen,
     } = repo
 
     return (

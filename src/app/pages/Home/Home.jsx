@@ -3,20 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { HomeActions } from '../../actions'
-
-import UserBox from './components/UserBox'
-import Loader from '../../ui-components/Loader'
+import UserBox from '../../ui-components/UserBox'
 
 class Home extends React.Component {
     static propTypes = {
         username: PropTypes.string,
-        isLoading: PropTypes.bool,
         error: PropTypes.shape({ message: PropTypes.string }),
         dispatch: PropTypes.func.isRequired,
     }
 
     static defaultProps = {
-        isLoading: false,
         error: null,
         username: '',
     }
@@ -25,7 +21,6 @@ class Home extends React.Component {
         const {
             username,
             error,
-            isLoading,
             dispatch,
         } = this.props
 

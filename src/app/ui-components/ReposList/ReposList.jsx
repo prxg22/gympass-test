@@ -3,13 +3,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // ui
-import { Row, Column } from '../../../ui-components/Grid'
+import { Row, Column } from '../Grid'
 
 // types
-import { RepoPropType } from '../../../types'
+import { RepoPropType } from '../../types'
 
 // components
-import RepoItem from './RepoItem'
+import RepoItem from '../RepoItem'
 
 // style
 import style from './RepoList.styl'
@@ -28,8 +28,8 @@ const ReposList = ({ repos, onOpen, onClose }) => (
                 <RepoItem
                     index={index}
                     repo={repo}
-                    onOpen={(index) => onOpen && onOpen(index)}
-                    onClose={(index) => onClose && onClose(index)}
+                    onOpen={i => onOpen && onOpen(i)}
+                    onClose={i => onClose && onClose(i)}
                 />
             </Column>
         ))}

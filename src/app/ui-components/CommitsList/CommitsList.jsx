@@ -3,8 +3,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // ui
-import { Column, Row } from '../../../ui-components/Grid'
-import Loader from '../../../ui-components/Loader'
+import { Column, Row } from '../Grid'
+import Loader from '../Loader'
+import Icon from '../Icon'
 
 // styles
 import styles from './CommitsList.styl'
@@ -23,7 +24,7 @@ const CommitsList = ({ commits }) => {
         <Row className={styles['commit-list']}>
             {commits.map(c => (
                 <Column>
-                    <span className="caption">{c.sha}</span>
+                    <span className="caption"><Icon name="file-code" /> {c.sha}</span>
                     <p className="tinny">{c.commit.message}</p>
                 </Column>
             ))}

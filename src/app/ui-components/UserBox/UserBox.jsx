@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Row, Column } from '../../../ui-components/Grid'
-import Box from '../../../ui-components/Box'
-import Input from '../../../ui-components/Input'
-import Button from '../../../ui-components/Button'
+import { Row, Column } from '../Grid'
+import Box from '../Box'
+import Input from '../Input'
+import Button from '../Button'
 
 import style from './UserBox.styl'
 

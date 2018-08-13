@@ -86,7 +86,10 @@ class Collapse extends Component {
     set content(children) {
         const { isOpen, onOpen, onClose } = this.props
 
-        this._content = reduceChildren(children, () => { isOpen ? onClose() : onOpen() })
+        this._content = reduceChildren(children, () => {
+            if (isOpen) return onClose()
+            return onOpen()
+        })
 
         this.setState({ ...this.state })
     }
@@ -96,32 +99,6 @@ class Collapse extends Component {
      */
     _content = INITIAL_CONTENT
 
-    // /**
-    //  * Toggles collapse's body
-    //  */
-    // toggle = () => {
-    //     const { state, props } = this
-    //     const { onOpen, onClose } = props
-    //
-    //     const nextState = { open: !state.open, closing: false }
-    //
-    //     let animation = null
-    //
-    //     if (state.open) {
-    //         animation = { closing: true }
-    //     }
-    //
-    //     this.setState(animation || nextState, () => {
-    //         if (!state.open && onOpen) onOpen()
-    //         if (state.open && onClose) onClose()
-    //
-    //         if (!animation) return null
-    //         if (!global.window) return this.setState(nextState)
-    //
-    //         return global.window.setTimeout(() => this.setState(nextState), 200)
-    //     })
-    // }
-
     renderHeader = () => {
         const { header } = this.content
         const { isOpen, onOpen, onClose } = this.props
@@ -130,7 +107,10 @@ class Collapse extends Component {
 
         return React.cloneElement(header, {
             className: classnames(header.className, style.collapse__header),
-            onClick: () => { isOpen ? onClose() : onOpen() },
+            onClick: () => {
+                if (isOpen) return onClose()
+                return onOpen()
+            },
             role: 'button',
         })
     }
@@ -152,7 +132,6 @@ class Collapse extends Component {
 
     render = () => {
         const {
-            state,
             content,
             props,
         } = this
